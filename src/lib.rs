@@ -1,10 +1,10 @@
-pub fn mergesort(list: &[i32]) -> Vec<i32> {
+pub fn mergesort<T: Ord + Clone>(list: &[T]) -> Vec<T> {
     if list.len() == 1 {
-        return vec![list[0]];
+        return vec![list[0].clone()];
     }
 
     // splitting function
-    let split = |list: &[i32]| {
+    let split = |list: &[T]| {
         let mid = list.len() >> 1;
         (mergesort(&list[..mid]), mergesort(&list[mid..]))
     };
@@ -19,7 +19,7 @@ pub fn mergesort(list: &[i32]) -> Vec<i32> {
     loop {
         if i >= a.len() {
             while j < b.len() {
-                result.push(b[j]);
+                result.push(b[j].clone());
                 j += 1;
             }
             break;
@@ -27,7 +27,7 @@ pub fn mergesort(list: &[i32]) -> Vec<i32> {
 
         if j >= b.len() {
             while i < a.len() {
-                result.push(a[i]);
+                result.push(a[i].clone());
                 i += 1;
             }
             break;
@@ -35,11 +35,11 @@ pub fn mergesort(list: &[i32]) -> Vec<i32> {
 
         if a[i] > b[j] {
             // b_j is smaller and comes first
-            result.push(b[j]);
+            result.push(b[j].clone());
             j += 1;
         } else {
             // a_i is smaller and comes first
-            result.push(a[i]);
+            result.push(a[i].clone());
             i += 1;
         }
     }
