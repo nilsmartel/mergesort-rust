@@ -1,5 +1,5 @@
 pub fn mergesort<T: Ord + Clone>(list: &[T]) -> Vec<T> {
-    if list.len() == 1 {
+    if list.len() <= 1 {
         return vec![list[0].clone()];
     }
 
@@ -17,6 +17,7 @@ pub fn mergesort<T: Ord + Clone>(list: &[T]) -> Vec<T> {
 
     let mut result = Vec::new();
     loop {
+        // if no elements remain in a, just fill up result with b
         if i >= a.len() {
             while j < b.len() {
                 result.push(b[j].clone());
@@ -25,6 +26,7 @@ pub fn mergesort<T: Ord + Clone>(list: &[T]) -> Vec<T> {
             break;
         }
 
+        // if no elements remain in b, just fill up result with a
         if j >= b.len() {
             while i < a.len() {
                 result.push(a[i].clone());
